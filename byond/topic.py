@@ -10,7 +10,7 @@ TOPIC_RESPONSE_FLOAT = b'\x2a'
 def send(address, port, query):
     """Send a Topic() packet to the specified server. Returns the response from the server.
 
-    :param address: address (IP or DNS) of the DreamDaemon instance to send the Topic() to. Default: localhost
+    :param address: address (IP or DNS) of the DreamDaemon instance to send the Topic() to.
     :param port:    port that the DreamDaemon instance is serving the world on
     :param query:   query string to be sent
 
