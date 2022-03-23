@@ -13,7 +13,16 @@ dumb_response = {
         "revision": {"commitSha": '70bc0ae0e8e4f3c85a79b4085eedf44123e3602c',
                      "originCommitSha": '70bc0ae0e8e4f3c85a79b4085eedf44123e3602c'},
         "testMerges": [],
-        "chatChannels": []
+        "channels": [
+            {
+                "id": 0,
+                "friendly_name": "Channel",
+                "connection_name": "conn.test",
+                "isAdminChannel": False,
+                "isPrivateChannel": False,
+                "tag": "Boop"
+             }
+        ]
     }
 }
 
