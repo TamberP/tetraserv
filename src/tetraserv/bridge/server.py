@@ -1,5 +1,7 @@
 import tetraserv
 import tetraserv.util.git
+import tetraserv.comms
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 import json
@@ -79,5 +81,9 @@ class BridgeHandler(BaseHTTPRequestHandler):
         elif commandType == 5:
             # Chat send
             logging.debug("Bridge: Chat send.")
+            # tgs_data["chatMessage"] contains json with:
+            # - text : The message
+            # - channelIds: IDs of the channels the message is to be sent to.
+            tserv.comms.worldchat(tgs_data["chatMessage"])
             tserv.bridge.worldChat()
             pass

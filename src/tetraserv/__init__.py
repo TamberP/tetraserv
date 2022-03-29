@@ -7,6 +7,8 @@ from tetraserv.bridge import Bridge
 from tetraserv.comms import Comms
 from tetraserv.watchdog import Watchdog
 
+VERSION = "0.0.1"
+
 global tserv
 
 def getTetra():

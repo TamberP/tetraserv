@@ -63,8 +63,27 @@ def send(address, port, query):
     if(response_type == TOPIC_RESPONSE_STRING):
         data = urllib.parse.parse_qs(str(response, encoding='utf8'), keep_blank_values=True)
 
-    if(response_type == TOPIC_RESPONSE_FLOAT):
+    elif(response_type == TOPIC_RESPONSE_FLOAT):
         # Float type response, where the data returned is a floating point value.
         data = struct.unpack('<f', response)[0]
 
+    else:
+        # No idea what response *this* is, but maybe it's something
+        # specific to a codebase we're not used to.
+        data = response
+
     return (response_type, data)
+
+def queryStatus(address, port):
+    responseType, responseData = send(address, port, '?status')
+    if(responseType == TOPIC_RESPONSE_STRING):
+        return responseData
+    else:
+        return None
+
+def queryPlayerCount(address, port):
+    responseType, responseData = send(address, port, '?playing')
+    if(responseType == TOPIC_RESPONSE_FLOAT):
+        return str(int(responseData))
+    else:
+        return None
