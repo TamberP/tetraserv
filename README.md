@@ -10,11 +10,9 @@ with BYOND servers, either hosted or standalone.
 
 (Whether we get to that point remains to be seen. :shrug: )
 
-## Libraries
+# PreRequisites/Dependencies
 
-* [`byond/topic`](doc/Topic.md) - A 'low-level' interface for sending
-  BYOND Topic() packets, in the same vein as
-  [BYOND.TopicSender](https://github.com/Cyberboss/BYOND.TopicSender)
+- (byond.topic)[https://github.com/TamberP/byond.topic], for Topic sending purposes.
 
 # License
 
