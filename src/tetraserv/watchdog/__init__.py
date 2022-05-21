@@ -4,6 +4,7 @@ import asyncio
 import signal
 import urllib
 import os.path
+import subprocess
 
 class Watchdog:
     def __init__(self, config):
@@ -13,7 +14,8 @@ class Watchdog:
     def shutdown(self):
         # Sends signal.SIGTERM to the process, which DreamDaemon traps
         # in order to perform a graceful shutdown.
-        self.dream.terminate()
+        logging.info('Watchdog - Shutting down [' + str(self.dream.pid) + ']')
+        self.dream.send_signal(signal.SIGTERM)
 
     async def start(self):
         await self.dream.run()
@@ -21,9 +23,11 @@ class Watchdog:
     def reboot(self):
         # Sends SIGUSR1 to the process, which DreamDaemon uses to perform
         # a reboot of the world.
+        logging.info('Watchdog - Rebooting world')
         self.dream.send_signal(signal.SIGUSR1)
 
     def kill(self):
+        logging.info('Watchdog - Killing world')
         self.dream.kill()
 
     def main(self):
@@ -59,7 +63,6 @@ class Watchdog:
             "-params {0}".format(paramstring)
         ]
 
-        self.dream = asyncio.create_subprocess_exec(self.Tetra.dreamDaemonBin(), *args)
-
-        asyncio.run(self.dream)
+        self.dream = subprocess.Popen([self.Tetra.dreamDaemonBin()] + args)
+        logging.info('Watchdog - DreamDaemon process PID: ' + str(self.dream.pid))
         pass
