@@ -12,7 +12,7 @@ with BYOND servers, either hosted or standalone.
 
 # PreRequisites/Dependencies
 
-- (byond.topic)[https://github.com/TamberP/byond.topic], for Topic sending purposes.
+- [https://github.com/TamberP/byond.topic](byond.topic), for Topic sending purposes.
 
 # License
 
