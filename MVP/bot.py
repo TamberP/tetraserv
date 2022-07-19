@@ -43,7 +43,7 @@ class DiscoClient(discord.Client):
             worldStatus = await loop.run_in_executor(None, byond.topic.queryStatus, dmServer, dmPort)
             if(worldStatus):
                 gamedesc = "{0} round {1}, on {2}, with {3} player{4}".\
-                    format(worldStatus['mode'][0],
+                    format(worldStatus['mode'][0].title(),
                            ("starting" if (newround) else "in progress"),
                            worldStatus['map_name'][0],
                            worldStatus['players'][0],
