@@ -71,18 +71,19 @@ class DiscoClient(discord.Client):
         if(message.author.id == self.user.id):
             return # Don't listen to ourselves. We just chat shit!
 
-        if((message.mentions and (self.user in message.mentions)) or (message.channel.type == discord.ChannelType.private)):
+        if((self.user.mentioned_in(message)) or (message.channel.type == discord.ChannelType.private)):
             # Oh! Pay attention!
             if(message.content.find('ping')>0):
                 await message.reply('pong!', mention_author=True)
 
-            if(message.content.find('status')>0):
+            elif(message.content.find('status')>0):
                 async with message.channel.typing():
                     statusCard = await self.checkStatus()
                 if(statusCard):
-                    await message.reply(embed=statusCard)
+                    await message.reply(embed=statusCard, mention_author=True)
                 else:
-                    await message.reply("I dunno man...")
+                    await message.reply("I dunno man...", mention_author=True)
+
 
     async def on_disconnect(self):
         logging.info('Discord - Disconnected')
@@ -94,6 +95,10 @@ class DiscoClient(discord.Client):
         if(status == 'init'):
             statusCard = await checkStatus(self, True)
             self.announcechan.send(embed=statusCard)
+        elif(status == 'reboot'):
+            self.announcechan.send("World Rebooting")
+        elif(status == 'shutdown'):
+            self.announcechan.send("World shutting down")
 
 
 def main():

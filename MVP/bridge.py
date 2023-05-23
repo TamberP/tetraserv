@@ -6,6 +6,7 @@ import urllib.parse
 import logging
 import asyncio
 import subprocess
+from tetrautil import getHash, getHashUpstream
 
 def BridgeServerFucktory(conf, comms, otherloop):
     class BridgeServer(BaseHTTPRequestHandler):
@@ -66,8 +67,8 @@ def BridgeServerFucktory(conf, comms, otherloop):
                         "instanceName":  "ChangeMe XXX",
                         "revision":
                         {
-                            "commitSha": 'sha hash here',
-                            "originCommitSha": 'another sha hash here'
+                            "commitSha": tetrautil.getHash(self),
+                            "originCommitSha": tetrautil.getUpstreamHash(self)
                         },
                         "testMerges": [],
                         "channels": []
@@ -80,8 +81,13 @@ def BridgeServerFucktory(conf, comms, otherloop):
                 asyncio.run_coroutine_threadsafe(self.discrod.Announce('init'), self.evloop)
             elif commandType == 3:
                 logging.info("Bridge: World requests reboot")
+                asyncio.run_coroutine_threadsafe(self.discrod.Announce('reboot'), self.evloop)
+                reslut = subprocess.run(["/usr/bin/pgrep", "-x", "DreamDaemon"], capture_output=True)
+                os.kill(int(reslut.stdout), signal.SIGUSR1)
             elif commandType == 4:
                 logging.info("Bridge: World requests shutdown.")
+                reslut = subprocess.run(["/usr/bin/pgrep", "-x", "DreamDaemon"], capture_output=True)
+                os.kill(int(reslut.stdout), signal.SIGTERM)
             elif commandType == 5:
                 # Chat send.
                 logging.debug("Bridge: Chat send")
