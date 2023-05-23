@@ -5,6 +5,7 @@ import json
 import urllib.parse
 import logging
 import asyncio
+import subprocess
 
 def BridgeServerFucktory(conf, comms, otherloop):
     class BridgeServer(BaseHTTPRequestHandler):
