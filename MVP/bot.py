@@ -142,7 +142,10 @@ def main():
     bridgeThread = threading.Thread(target=bridge.serve_forever)
 
     bridgeThread.start()
-    daDiscoClient.run(config['Discord']['Secret'])
+
+    our_intents = discord.Intents.default()
+    our_intents.message_content = True
+    daDiscoClient.run(config['Discord']['Secret'], intents=our_intents)
 
 def checkIdentifier(ident):
     # Check the given ident key against the one from our config.
