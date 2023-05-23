@@ -18,7 +18,9 @@ class DiscoClient(discord.Client):
 
     def __init__(self):
         global config
-        super().__init__()
+        our_intents = discord.Intents.default()
+        our_intents.message_content = True
+        super().__init__(intents=our_intents)
 
     async def on_ready(self):
         global config
@@ -143,9 +145,7 @@ def main():
 
     bridgeThread.start()
 
-    our_intents = discord.Intents.default()
-    our_intents.message_content = True
-    daDiscoClient.run(config['Discord']['Secret'], intents=our_intents)
+    daDiscoClient.run(config['Discord']['Secret'])
 
 def checkIdentifier(ident):
     # Check the given ident key against the one from our config.
