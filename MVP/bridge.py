@@ -6,7 +6,7 @@ import urllib.parse
 import logging
 import asyncio
 import subprocess
-from tetrautil import getHash, getHashUpstream
+from .tetrautil import getHash, getHashUpstream
 
 def BridgeServerFucktory(conf, comms, otherloop):
     class BridgeServer(BaseHTTPRequestHandler):
