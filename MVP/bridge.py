@@ -6,7 +6,7 @@ import urllib.parse
 import logging
 import asyncio
 import subprocess
-from .tetrautil import getHash, getHashUpstream
+import tetrautil
 
 def BridgeServerFucktory(conf, comms, otherloop):
     class BridgeServer(BaseHTTPRequestHandler):
@@ -68,7 +68,7 @@ def BridgeServerFucktory(conf, comms, otherloop):
                         "revision":
                         {
                             "commitSha": tetrautil.getHash(self),
-                            "originCommitSha": tetrautil.getUpstreamHash(self)
+                            "originCommitSha": tetrautil.getHashUpstream(self)
                         },
                         "testMerges": [],
                         "channels": []
