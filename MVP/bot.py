@@ -5,6 +5,7 @@ import logging
 import argparse
 import os, sys
 import time
+import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import threading
 import asyncio
@@ -44,12 +45,14 @@ class DiscoClient(discord.Client):
         try:
             worldStatus = await loop.run_in_executor(None, byond.topic.queryStatus, dmServer, dmPort)
             if(worldStatus):
-                gamedesc = "{0} round {1}, on {2}, with {3} player{4}".\
+                gamedesc = "{0} round {1}, on {2}, with {3} player{4}.\nRound time: {5}".\
                     format(worldStatus['mode'][0].title(),
                            ("starting" if (newround) else "in progress"),
                            worldStatus['map_name'][0],
                            worldStatus['players'][0],
-                           ("" if (worldStatus['players'][0] == 1) else "s"))
+                           ("" if (worldStatus['players'][0] == 1) else "s"),
+                           str(datetime.timedelta(worldStatus['round_duration'][0]))
+                           )
 
                 statusCard = discord.Embed(title="Game Status - {0}".format(worldStatus['version'][0]),
                                            description=gamedesc,
