@@ -52,7 +52,6 @@ class DiscoClient(discord.Client):
                            worldStatus['players'][0],
                            ("" if (worldStatus['players'][0] == 1) else "s"),
                            worldStatus['round_duration'][0])
-                           )
 
                 statusCard = discord.Embed(title="Game Status - {0}".format(worldStatus['version'][0]),
                                            description=gamedesc,
