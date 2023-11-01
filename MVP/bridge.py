@@ -8,6 +8,7 @@ import asyncio
 import subprocess
 import tetrautil
 import os
+import signal
 
 def BridgeServerFucktory(conf, comms, otherloop):
     class BridgeServer(BaseHTTPRequestHandler):
