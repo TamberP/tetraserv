@@ -36,7 +36,7 @@ def BridgeServerFucktory(conf, comms, otherloop):
                     return
             else:
                 logging.warning("Bridge: No TGS key received")
-
+                return
                 # It should also pass, in tgsData["accessIdentifier"], the
                 # authentication key passed as part of the server's param
                 # string when DreamDaemon was started.
