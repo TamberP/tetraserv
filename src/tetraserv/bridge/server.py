@@ -84,6 +84,6 @@ class BridgeHandler(BaseHTTPRequestHandler):
             # tgs_data["chatMessage"] contains json with:
             # - text : The message
             # - channelIds: IDs of the channels the message is to be sent to.
-            tserv.comms.worldchat(tgs_data["chatMessage"])
+            tserv.comms.worldchat(tgsData["chatMessage"])
             tserv.bridge.worldChat()
             pass
