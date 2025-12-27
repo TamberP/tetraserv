@@ -19,8 +19,11 @@ def main():
     print(response_data)
 
     response_type,response_data = Topic.send(host, port, '?playing')
-
     print("Current players from '?playing': " + str(int(response_data)))
+
+    response_type,response_data = Topic.send(host, port, '?admins')
+    print("Current admins from '?admins': ")
+    print(response_data)
 
 
 if __name__ == "__main__":
